@@ -1,0 +1,47 @@
+.Form form {
+  > div {
+    position: relative;
+    padding: 1rem 0;
+
+    input {
+      width: 100%;
+      outline: none;
+    }
+
+    label {
+      position: absolute;
+      left: 0;
+      bottom: 1.2rem;
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+
+    input:focus ~ label, input:active ~ label, input:not(:placeholder-shown) ~ label {
+      transform: translateY(-1rem) scale(0.7);
+    }
+  }
+}
+
+.Form {
+  input {
+    border: 0;
+    border-bottom: 1px solid $mainColor;
+  }
+}
+
+.Form .submit {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: $blueColor;
+  padding: 1rem 2rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $mainColor;
+  }
+}
