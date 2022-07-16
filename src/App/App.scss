@@ -1,0 +1,15 @@
+@import "../styles/colors.scss";
+
+// Components
+
+@import "../Components/Form/Form.scss";
+@import "../Components/Header/Header.scss";
+@import "../Components/HeaderAccount/HeaderAccount.css";
+@import "../Components/Menu/Menu.scss";
+
+// Templates
+
+@import "../Templates/Login/Login.scss";
+@import "../Templates/Register/Register.scss";
+@import "../Templates/ChatForm/ChatForm.scss";
+@import "../Templates/Chat/Chat.scss";
