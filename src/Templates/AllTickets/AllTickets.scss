@@ -1,0 +1,13 @@
+.AllTickets {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1000px;
+  margin: auto;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .AllTickets {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -15,3 +15,9 @@
 .Login-link {
   text-decoration: underline;
 }
+
+.Login-error {
+  background-color: $errorColor;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

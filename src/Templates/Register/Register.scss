@@ -15,3 +15,9 @@
 .Register-link {
   text-decoration: underline;
 }
+
+.Register-error {
+  background-color: $errorColor;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

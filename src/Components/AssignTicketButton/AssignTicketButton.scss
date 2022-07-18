@@ -1,0 +1,15 @@
+.AssignTicketButton button {
+  width: 100%;
+  border: 0;
+  background-color: $blueColor;
+  transition: background-color 0.3s ease;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $mainColor;
+  }
+}

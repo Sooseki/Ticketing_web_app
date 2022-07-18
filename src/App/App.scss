@@ -6,10 +6,16 @@
 @import "../Components/Header/Header.scss";
 @import "../Components/HeaderAccount/HeaderAccount.css";
 @import "../Components/Menu/Menu.scss";
+@import "../Components/ChatBlock/ChatBlock.scss";
+@import "../Components/TicketsList/TicketsList.scss";
+@import "../Components/Ticket/Ticket.scss";
+@import "../Components/AssignTicketButton/AssignTicketButton.scss";
+@import "../Components/CloseTicketButton/CloseTicketButton.scss";
 
 // Templates
 
 @import "../Templates/Login/Login.scss";
 @import "../Templates/Register/Register.scss";
 @import "../Templates/ChatForm/ChatForm.scss";
+@import "../Templates/AllTickets/AllTickets.scss";
 @import "../Templates/Chat/Chat.scss";
