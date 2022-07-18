@@ -1,38 +1,53 @@
-import React, { useState } from 'react';
-import Form from '../../Components/Form/Form';
-import Messages from '../../Components/Messages/Messages';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useGetApi } from '../../Api/Api';
+import { apiUrl } from '../../Api/helpers';
+import { user } from '../../Api/interfaces';
+import AssignTicketButton from '../../Components/AssignTicketButton/AssignTicketButton';
+import ChatBlock from '../../Components/ChatBlock/ChatBlock';
+import CloseTicketButton from '../../Components/CloseTicketButton/CloseTicketButton';
 
-const Chat = () => {
-  const [data, setData] = useState();
+interface props {
+  user: user;
+}
 
-  const formInputs = {
-    inputs: [
-      {      
-        'name': 'message',
-        'type': 'textarea', 
-        'placeholder': 'Write here ...',
-      }
-    ],
-    submit: {
-      'value': 'send'
+const Chat = ({ user }: props) => {
+
+  if (!user) {
+    window.location.href = '/'
+  } 
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const ticket_id = searchParams.get('ticket')
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': user.token
     }
-  };
-
-  const handleSumbit = (e: React.FormEvent) => {
-    e.preventDefault();
   }
+
+  const [getTicket, ticket, setTicket] = useGetApi(apiUrl + "/ticket/" + ticket_id, config)
+  
+  useEffect(() => {
+    getTicket()
+  }, []);
+
 
   return (
     <div className="Chat">
-      <div className="Chat-form">
-        <div className="Chat-form-messages">
-          <Messages />
+      {user && ticket_id &&
+        <div>
+          <ChatBlock ticket_id={ticket_id} user={user} />
+          <div className="Chat-controls"></div>
         </div>
-        <div className="Chat-form-form">
-          <Form handleSumbit={handleSumbit} formInputs={formInputs} setData={setData} />
-        </div>
-      </div>
-      <div className="Chat-controls"></div>
+      }
+      {user && user.role == 1 && ticket && ticket.status == 0 &&
+        <AssignTicketButton ticket={ticket} user={user} />
+      }
+      {user && user.role == 1 && ticket && ticket.status == 1 &&
+        <CloseTicketButton ticket={ticket} user={user} />
+      }
     </div>
   );
 }
