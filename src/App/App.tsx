@@ -6,6 +6,7 @@ import AllTickets from '../Templates/AllTickets/AllTickets';
 import Chat from '../Templates/Chat/Chat';
 import ChatForm from '../Templates/ChatForm/ChatForm';
 import Login from '../Templates/Login/Login';
+import MergeTickets from '../Templates/MergeTickets/MergeTickets';
 import Register from '../Templates/Register/Register';
 import './App.scss';
 
@@ -16,7 +17,6 @@ const App = () => {
 
   useEffect(() => {
     const userInfo = localStorage.getItem('user')
-    console.log(userInfo)
     if (userInfo) {
       setUser(JSON.parse(userInfo))
     }
@@ -35,7 +35,8 @@ const App = () => {
               <Route path="chat" element={<Chat user={user} />}></Route>
             </Route>
             <Route path="/tickets">
-              <Route path="all"  element={<AllTickets user={user} />} />
+              <Route path="all" element={<AllTickets user={user} />} />
+              <Route path="merge" element={<MergeTickets user={user} />} />
             </Route>
           </Route>
         }

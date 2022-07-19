@@ -9,17 +9,18 @@ interface props {
     total: number;
     rows: ticket[];
   };
-  status: number
+  status: number;
+  onclick: string|Function;
 }
 
-const TicketsList = ({ list, status }: props) => {
+const TicketsList = ({ list, status, onclick }: props) => {
 
   const setTitle = (status: number) => {
     switch(status) {
       case 0:
         return 'Waiting tickets'
       case 1:
-        return 'Your tickets'
+        return 'Active tickets'
       default:
         return 'oops'
     }
@@ -29,7 +30,7 @@ const TicketsList = ({ list, status }: props) => {
     <div className="TicketsList">
       <h1>{setTitle(status)}</h1>
       {list.rows.map((row, id) => 
-        <Ticket key={id} ticket={row} />
+        <Ticket key={id} ticket={row} onclick={onclick} />
       )}
     </div>
   );

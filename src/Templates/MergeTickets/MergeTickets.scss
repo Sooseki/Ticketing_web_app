@@ -1,0 +1,25 @@
+.MergeTickets {
+  max-width: 1000px;
+  padding: 1rem;
+  margin: auto;
+}
+
+.MergeTickets button {
+  width: 100%;
+  border: 0;
+  background-color: $blueColor;
+  transition: background-color 0.3s ease;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+
+  &:not(.disabled):hover {
+    cursor: pointer;
+    background-color: $mainColor;
+  }
+
+  &.disabled {
+    background-color: $lightGreyColor;
+  }
+}

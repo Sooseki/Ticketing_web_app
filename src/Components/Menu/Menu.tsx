@@ -6,16 +6,10 @@ const Menu = () => {
     <div className="Menu">
       <ul>
         <li>
-          <a>All messages</a>
+          <a href="/tickets/all">All messages</a>
         </li>
         <li>
-          <a>Merge tickets</a>
-        </li>
-        <li>
-          <a>My tickets</a>
-        </li>
-        <li>
-          <a>New messages</a>
+          <a href="/tickets/merge">Merge tickets</a>
         </li>
       </ul>
     </div>

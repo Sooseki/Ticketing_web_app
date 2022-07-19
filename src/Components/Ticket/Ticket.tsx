@@ -1,28 +1,33 @@
 import React from 'react';
+import { ticket } from '../../Api/interfaces';
 
 interface props {
-  ticket: {
-    id: number; 
-    opening_date: Date; 
-    closing_date: Date | null;
-    status: number;
-    description: string;
-    theme: string;
-  };
+  ticket: ticket;
+  onclick: string|Function;
 }
 
-const Ticket = ({ ticket }: props) => {
+const Ticket = ({ ticket, onclick }: props) => {
+
+  const getTicketContent = () => {
+    return <>
+      <div>Requête: {ticket.theme} </div>
+      <div><>Date: {ticket.opening_date}</></div>
+    </>
+  }
 
   return (
     <div className="Ticket">
-      <a href={"/discussion/chat?ticket=" + ticket.id}>
-        {ticket && 
-          <>
-            <div>Requête: {ticket.theme} </div>
-            <div><>Date: {ticket.opening_date}</></div>
-          </>
-        }
-      </a>
+
+      {ticket && typeof(onclick) === 'string' && 
+        <a href={onclick + ticket.id}>
+          {getTicketContent()}
+        </a>
+      }
+      {ticket && typeof(onclick) === 'function' &&
+        <div onClick={(e) => onclick(e, ticket.id)}>
+          {getTicketContent()}
+        </div>
+      }
     </div>
   );
 }

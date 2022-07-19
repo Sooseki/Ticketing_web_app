@@ -10,7 +10,7 @@ interface props {
 
 const AllTickets = ({ user }: props) => {
 
-  if (!user) {
+  if (!user || user.role !== 1) {
     window.location.href = '/'
   } 
 
@@ -30,7 +30,8 @@ const AllTickets = ({ user }: props) => {
       'authorization': user.token
     },
     params: {
-      'user_id': user.id
+      'user_id': user.id,
+      'status': 1
     }
   }
 
@@ -42,19 +43,19 @@ const AllTickets = ({ user }: props) => {
     getMyTickets()
   }, []);
 
-  console.log(waitingTickets)
-
+  console.log(myTickets)
+  
   return (
     <div className="AllTickets">
       {waitingTickets && 
         <div>
           {/* 0 means waiting tickets, 1 means open, 2 means close */}
-          <TicketsList list={waitingTickets} status={0} /> 
+          <TicketsList list={waitingTickets} status={0} onclick={"/discussion/chat?ticket="} /> 
         </div>
       }
       {myTickets &&
         <div>
-          <TicketsList list={myTickets} status={1} />
+          <TicketsList list={myTickets} status={1} onclick={"/discussion/chat?ticket="} />
         </div>
       }
     </div>
