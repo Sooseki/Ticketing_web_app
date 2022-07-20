@@ -1,0 +1,22 @@
+.Messages li {
+  list-style: none;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+  width: 60%;
+}
+
+.Messages ul {
+  display: grid;
+  gap: 1rem;
+}
+
+.Messages .myMessage {
+  justify-self: flex-end;
+  margin-right: .5rem;
+  background-color: $lightGreyColor;
+}
+
+.Messages .correspondantMessage {
+  background-color: $blueColor;
+}

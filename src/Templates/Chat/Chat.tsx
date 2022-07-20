@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useGetApi } from '../../Api/Api';
 import { apiUrl } from '../../Api/helpers';
@@ -28,17 +28,18 @@ const Chat = ({ user }: props) => {
   }
 
   const [getTicket, ticket, setTicket] = useGetApi(apiUrl + "/ticket/" + ticket_id, config)
-  
+  const [getMessages, messages, setMessages] = useGetApi(apiUrl + '/message/all/' + ticket_id, config)
+
   useEffect(() => {
     getTicket()
+    getMessages()
   }, []);
-
 
   return (
     <div className="Chat">
-      {user && ticket_id &&
+      {user && ticket_id && messages && messages.rows &&
         <div>
-          <ChatBlock ticket_id={ticket_id} user={user} />
+          <ChatBlock ticket_id={ticket_id} user={user} messages={messages.rows}/>
           <div className="Chat-controls"></div>
         </div>
       }

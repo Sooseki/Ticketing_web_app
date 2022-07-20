@@ -4,10 +4,10 @@ import { user } from '../Api/interfaces';
 import Header from '../Components/Header/Header';
 import AllTickets from '../Templates/AllTickets/AllTickets';
 import Chat from '../Templates/Chat/Chat';
-import ChatForm from '../Templates/ChatForm/ChatForm';
 import Login from '../Templates/Login/Login';
 import MergeTickets from '../Templates/MergeTickets/MergeTickets';
 import Register from '../Templates/Register/Register';
+import UserTickets from '../Templates/UserTickets/UserTickets';
 import './App.scss';
 
 
@@ -31,7 +31,7 @@ const App = () => {
         {user &&
           <Route>
             <Route path="/discussion">
-              <Route path="start" element={<ChatForm user={user} />}></Route>
+              <Route path="start" element={<UserTickets user={user} />}></Route>
               <Route path="chat" element={<Chat user={user} />}></Route>
             </Route>
             <Route path="/tickets">

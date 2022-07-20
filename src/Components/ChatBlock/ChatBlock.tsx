@@ -1,16 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Form from '../Form/Form';
 import Messages from '../Messages/Messages';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { useSearchParams } from 'react-router-dom';
 import { user } from '../../Api/interfaces';
+import { useGetApi } from '../../Api/Api';
+import { apiUrl, header } from '../../Api/helpers';
 
 interface props {
   user: user;
   ticket_id: string;
+  messages: message[]
 }
 
-interface message {
+interface postMessage {
   user_id: number;
   message: string;
   ticket_id: string | null;
@@ -18,31 +19,38 @@ interface message {
   last_name: string;
 }
 
-const ChatBlock = ({ user, ticket_id }: props) => {
+interface message {
+  id: number;
+  date: string;
+  text: string;
+  ticket_id: string | null;
+  first_name: string;
+  role: number;
+}
 
-  const url: string = 'ws://localhost:8080/chat/' + ticket_id 
+const ChatBlock = ({ user, ticket_id, messages }: props) => {
+
+  const url: string = 'ws://localhost:8080/chat/?ticket=' + ticket_id 
   const [ws, setWs] = useState(new WebSocket(url)) 
 
-  const [data, setData] = useState<message>({
+  const [data, setData] = useState<postMessage>({
     user_id: user.id,
     message: "",
     ticket_id: ticket_id,
     first_name: user.first_name,
     last_name: user.last_name
   });
-  const [messagesHistory, setMessagesHistory] = useState<message[]>([])
+  const [messagesHistory, setMessagesHistory] = useState<message[]>(messages)
 
   useEffect(() => {  
+    
     ws.onmessage = (e) => {
-      console.log(e)
       const message = JSON.parse(e.data)
       setMessagesHistory([message, ...messagesHistory])
-      console.log(messagesHistory)
     }
   
     return () => {
       ws.onclose = () => {
-        console.log('WebSocket Disconnected')
         setWs(new WebSocket(url))
       }
     }
@@ -52,7 +60,6 @@ const ChatBlock = ({ user, ticket_id }: props) => {
     e.preventDefault()
     if (data) {
       ws.send(JSON.stringify(data))
-      setMessagesHistory([data, ...messagesHistory])
     }
   };
 
@@ -77,11 +84,12 @@ const ChatBlock = ({ user, ticket_id }: props) => {
   //   [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
   // }[readyState];
 
+  console.log(messagesHistory)
   return (
     <div className="ChatBlock">
       <div className="ChatBlock-form">
         <div className="ChatBlock-form-messages">
-          <Messages messages={messagesHistory} />
+          <Messages messages={messagesHistory} user={user} />
         </div>
         <div className="ChatBlock-form-form">
           <Form handleSumbit={handleSumbit} formInputs={formInputs} setData={setData} />
