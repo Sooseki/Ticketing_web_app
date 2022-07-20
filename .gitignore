@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+/src/**/*.css
+/src/**/*.css.map
 
 # production
 /build
